@@ -69,7 +69,7 @@ Prerequisite: Nix installed
   - run software without installing it
   - shebangs and reproducible scripts, with examples
     - generate Vanderbilt CS course dependency graph with pygraphviz
-    - Haskell palindrome program
+    - concurrent web scraping with Haskell
 - Channels
   - Updating channels
 ### Nix language
@@ -88,15 +88,40 @@ Prerequisite: Nix installed
       `fix`).
 
 ## 3. Packaging with Nix
-- Packages as functions, inputs and outputs
-### Build larger and larger programs
+### Background
+- Example in RPM
+- Packages are just functions (Nix expressions)
+  - Inputs: dependencies
+  - Outputs: results
+- nominal vs. contractual specification of dependencies (see thesis)
+- When can one component be replaced with another one?  Just when the
+  name matches?  No! -> Nix uses cryptographic hash to tell them
+  apart, so these are all different:
+  - glibc-2.3.5 built with GCC
+  - glibc-2.3.5 built with clang
+  - glibc-2.3.5 + different build flags
+  - glibc-2.3.5 + vendor-specific patches
+### Practice
+- Derivations
+  - `mkDerivation` (don't get too deep, refer to salient points from
+    Nix pills)
+- Build phases, pre/post phases
+- Developing with Nix shell
 - Shell script to print hello
 - Hello world in C
-- GNU Hello, Ed
-- `nix build --check`
+- Autoconf-based projects; GNU Hello, Ed
+- CMake-based projects; Powder Toy
+- Check your work; `nix build --check`
+- Continuous Integration with GitHub Actions
 ### Discussion questions
+- [ ] Build one of the assignments from your CS class by writing a Nix
+      expression.  What dependencies did it rely on at build time, and
+      at runtime?
+- [ ] Think of software you use often that you have installed via
+      another package manager, is it in Nixpkgs?  Outline what it
+      would take to write an expression for it (bonus points if you
+      write a working expression)
 - [ ] https://github.com/siraben/nix-challenges
-
 
 TODO: select from topics below
 ## Can't get enough of Nix?  Some topics to explore
@@ -111,18 +136,23 @@ TODO: select from topics below
 - [Practical examples of Nix use](https://nix.dev)
   - Continuous integration with Nix
   - Generating GitHub Actions artifacts
+- Per-project configuration with Nix + direnv, language servers in
+  Emacs/VS Code
 - Manage user configuration with Nix: Home Manager
 - Manage OS configuration with Nix: NixOS, nix-darwin
+- Declarative Docker containers
+- Building Linux software on macOS using
+  [linuxkit-nix](https://github.com/nix-community/linuxkit-nix)
 - Overrides and overlays
 - Cross-compilation
 - Build-time environment variables and flags
-- Even more reproducibility: pinning Nixpkgs
-- Niv
+- Even more reproducibility by pinning Nixpkgs: manually, with Niv
 - Nix flakes
 
 ### Contributing
 - Adding a package to Nixpkgs
 - Adding a cross toolchain to Nixpkgs
-- Reviewing PRs
+- Reviewing PRs with
+  [nixpkgs-review](https://github.com/Mic92/nixpkgs-review)
 - Community
   - IRC, Discourse, Reddit, Discord
