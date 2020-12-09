@@ -5,6 +5,12 @@ systems is useful but not required.  Each session should take around 1
 hr with time for questions.
 
 ## 1. Introduction and motivation
+Prerequisites: none
+
+This session will focus on motivating Nix by providing relevant
+examples and situations that almost all developers face when they
+start working on larger projects.  The central issue is _dependency
+management_.
 ### Motivation
 - Development environments
 - Building software with dependencies
@@ -32,7 +38,7 @@ home, work and school.
 - TODO: add content from Dolstra's PhD thesis on Nix
 ### A Little Theory
 - Refresher on binary relations, directed graphs, graph representation
-  of relations, transitive reflexive closure of a relation
+  of relations, transitive closure of a relation
 - Build time dependency: what is needed to build the software
   - e.g. `cmake`, `clang`, `gcc`, `autoconf`
 - Runtime dependency: what is needed at runtime 
@@ -55,9 +61,14 @@ home, work and school.
       source code at all?  If so, what was the problem?
 
 ## 2. Using Nix
-Prerequisite: Nix installed
+Prerequisites: An installation of Nix
+
+This session explains how to use the Nix CLI for imperative package
+management.  Nix can function much like other package managers you are
+used to, but has extra powers like rollbacks and reproducibility.
 
 ### Nix CLI
+- Nixpkgs, scope and contents
 - Installing, uninstalling, upgrading packages
 - Generations
   - listing, rolling back
@@ -88,8 +99,16 @@ Prerequisite: Nix installed
       `fix`).
 
 ## 3. Packaging with Nix
+Prerequisites: installation of Nix, text editor, basic command line
+knowledge, some programming experience
+
+You will inevitably have a need to build and install packages that are
+not in Nixpkgs.  Nix takes a different approach than what many people
+are used to, instead of installing your dependencies imperatively, you
+write a Nix expression.
+
 ### Background
-- Example in RPM
+- Example in RPM, brew, Make
 - Packages are just functions (Nix expressions)
   - Inputs: dependencies
   - Outputs: results
@@ -122,6 +141,27 @@ Prerequisite: Nix installed
       would take to write an expression for it (bonus points if you
       write a working expression)
 - [ ] https://github.com/siraben/nix-challenges
+
+## 4. Extending Nix with overlays
+Prerequisites: installation of Nix, some programming experience, basic
+understanding of Nix expressions
+
+You've seen how to package individual projects with Nix, but how does
+it fit together in the large?  It's not always possible or desirable
+to upstream to Nixpkgs, but you still want to take advantage of
+Nixpkgs when you can.  Nix does this with overlays.
+
+### What problems do overlays solve?
+- Extending Nixpkgs
+  - Adding a new set of packages
+- Changing Nixpkgs
+  - Overriding a version
+  - Adding patches
+  - Customizing compilation options
+### Further reading
+- [Nix wiki entry on overlays](https://nixos.wiki/wiki/Overlays)
+- [DOs and DON'Ts of
+  overlays](https://blog.flyingcircus.io/2017/11/07/nixos-the-dos-and-donts-of-nixpkgs-overlays/)
 
 TODO: select from topics below
 ## Can't get enough of Nix?  Some topics to explore
